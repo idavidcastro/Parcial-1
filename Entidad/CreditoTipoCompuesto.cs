@@ -8,29 +8,28 @@ namespace Entidad
 {
         public class CreditoTipoCompuesto: Creditos
     {
-        public CreditoTipoCompuesto(decimal montoDinero, decimal valorInteres, int periodo)
+        public CreditoTipoCompuesto(int numeroCredito, int identificacionCliente, decimal montoDinero, int tipoTasaInteres, decimal valorInteres, int periodo)
         {
             MontoDinero = montoDinero;
             ValorInteres = valorInteres;
             Periodo = periodo;
+            IdentificacionCliente = identificacionCliente;
+            TipoTasaInteres = tipoTasaInteres;
+            NumeroCredito = numeroCredito;
         }
          
 
-        public decimal MontoDinero { get; set; }
-        public decimal ValorInteres { get; set; }
-        public int Periodo { get; set; }
-
         public override void CalcularCredito()
         {
-            decimal capitalFinal;
+            
             decimal elevacion;
             ValorInteres /= 100;
 
             elevacion= (decimal)Math.Pow((double)(1 + ValorInteres), Periodo);
 
-            capitalFinal = MontoDinero * elevacion;
+            CapitalFinal = MontoDinero * elevacion;
 
-            Console.WriteLine($"El capital final a pagar es: {capitalFinal}");
+            Console.WriteLine($"El capital final es: {CapitalFinal}");
         }
 
     }

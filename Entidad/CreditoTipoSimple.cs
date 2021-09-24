@@ -8,24 +8,24 @@ namespace Entidad
 {
     public class CreditoTipoSimple: Creditos
     {
-        public CreditoTipoSimple(decimal montoDinero, decimal valorInteres, int periodo)
+        public CreditoTipoSimple(int numeroCredito, int identificacionCliente, decimal montoDinero, int tipoTasaInteres, decimal valorInteres, int periodo)
         {
             MontoDinero = montoDinero;
             ValorInteres = valorInteres;
             Periodo = periodo;
+            IdentificacionCliente = identificacionCliente;
+            TipoTasaInteres = tipoTasaInteres;
+            NumeroCredito = numeroCredito;
         }
-        public decimal MontoDinero { get; set; }
-        public decimal ValorInteres { get; set; }
-        public int Periodo { get; set; }
 
         public override void CalcularCredito()
         {
-            decimal capitalFinal;
+            
             ValorInteres /= 100;
 
-            capitalFinal = MontoDinero * (1 + ValorInteres * Periodo);
+            CapitalFinal = MontoDinero * (1 + ValorInteres * Periodo);
 
-            Console.WriteLine($"El capital final a pagar es: {capitalFinal}");
+            Console.WriteLine($"El capital final es: {CapitalFinal}");
         }
 
     }

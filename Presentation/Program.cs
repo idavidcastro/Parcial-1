@@ -1,5 +1,6 @@
 ﻿using System;
 using Entidad;
+using Lógica;
 
 namespace Presentation
 {
@@ -9,7 +10,12 @@ namespace Presentation
         {
             decimal montoDinero;
             decimal valorInteres;
-            int periodo, tipoTasaInteres;
+            int periodo, tipoTasaInteres, numeroCredito, identificacionCliente;
+
+            Console.Write("Ingrese el número del crédito: ");
+            numeroCredito = int.Parse(Console.ReadLine());
+            Console.Write("Ingrese la identificacion del cliente: ");
+            identificacionCliente = int.Parse(Console.ReadLine());
             Console.Write("Ingrese el monto de dinero a solicitar: ");
             montoDinero = decimal.Parse(Console.ReadLine());
             Console.Write("Ingrese el tipo de tasa de interes (1-compuesto ; 2-simple): ");
@@ -24,16 +30,24 @@ namespace Presentation
             Console.Write("Ingrese el periodo de prestamo (AÑOS): ");
             periodo = int.Parse(Console.ReadLine());
 
+            Creditos creditos;
+
             if (tipoTasaInteres == 1)
             {
-                Creditos creditos = new CreditoTipoCompuesto(montoDinero, valorInteres, periodo);
+                creditos = new CreditoTipoCompuesto(numeroCredito, identificacionCliente, montoDinero, tipoTasaInteres, valorInteres, periodo);
                 creditos.CalcularCredito();
+                CreditoService creditoService = new();
+                creditoService.Guardar(creditos);
+                
             }
             else if(tipoTasaInteres == 2)
             {
-                Creditos creditos = new CreditoTipoSimple(montoDinero, valorInteres, periodo);
+                creditos = new CreditoTipoSimple(numeroCredito, identificacionCliente, montoDinero, tipoTasaInteres, valorInteres, periodo);
                 creditos.CalcularCredito();
+                CreditoService creditoService = new();
+                creditoService.Guardar(creditos);
             }
+
 
         }
     }
